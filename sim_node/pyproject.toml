@@ -1,0 +1,16 @@
+[project]
+name = "simulation"
+version = "0.1.0"
+description = "runs the mujoco simulator"
+requires-python = ">=3.12"
+dependencies = [
+ "eclipse-zenoh>=1.7.1",
+ "gymnasium[mujoco]>=1.2.3",
+]
+
+[project.scripts]
+simulate = "simulation:main"
+
+[build-system]
+requires = ["uv_build>=0.9.0,<0.10.0"]
+build-backend = "uv_build"
