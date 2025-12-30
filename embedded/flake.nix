@@ -14,10 +14,12 @@
       {
         defaultPackage = naersk-lib.buildPackage ./.;
         devShell = with pkgs; mkShell {
-          buildInputs = [ cargo rustc rustfmt pre-commit rustPackages.clippy picotool probe-rs-tools elf2uf2-rs ];
+          buildInputs = [ cargo rustc rustfmt pre-commit rustPackages.clippy picotool probe-rs-tools elf2uf2-rs nixfmt ];
           RUST_SRC_PATH = rustPlatform.rustLibSrc;
           shellHook = ''
-            #TODO
+            export PATH="$HOME/.cargo/bin:$PATH"
+            rustup default nightly
+            rustup target add thumbv6m-none-eabi
           '';
         };
       }
