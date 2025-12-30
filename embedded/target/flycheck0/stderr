@@ -1,0 +1,15 @@
+    Updating git repository `https://github.com/adamgreig/assign-resources`
+    Updating crates.io index
+error: failed to get `cyw43` as a dependency of package `embassy-rp-examples v0.1.0 (/Users/isaacpruett/Documents/personal_projects/hexapod/embedded)`
+
+Caused by:
+  failed to load source for dependency `cyw43`
+
+Caused by:
+  Unable to update /Users/isaacpruett/Documents/personal_projects/cyw43
+
+Caused by:
+  failed to read `/Users/isaacpruett/Documents/personal_projects/cyw43/Cargo.toml`
+
+Caused by:
+  No such file or directory (os error 2)
