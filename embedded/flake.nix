@@ -9,19 +9,55 @@
     utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        naersk-lib = pkgs.callPackage naersk { };
+
+        # IMPORTANT: naersk must be wired to the toolchain you want
+        # (don’t let it default to pkgs.cargo/pkgs.rustc)
+        rustToolchain = pkgs.rust-bin.nightly.latest.default.override {
+          targets = [
+            "thumbv8m.main-none-eabihf"
+            "thumbv8m.main-none-eabi"
+          ];
+          extensions = [ "rust-src" "rustfmt" "clippy" ];
+        };
+
+        naersk-lib = pkgs.callPackage naersk {
+          cargo = rustToolchain;
+          rustc = rustToolchain;
+        };
+
+        arch = "thumbv8m.main-none-eabihf";
       in
       {
-        defaultPackage = naersk-lib.buildPackage ./.;
-        devShell = with pkgs; mkShell {
-          buildInputs = [ cargo rustc rustfmt pre-commit rustPackages.clippy picotool probe-rs-tools elf2uf2-rs nixfmt ];
-          RUST_SRC_PATH = rustPlatform.rustLibSrc;
+        packages.default = naersk-lib.buildPackage {
+          pname = "embedded";
+          src = ./.;
+        };
+
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            rustToolchain   # <- this provides cargo/rustc/rustfmt/clippy + targets
+            pre-commit
+            picotool
+            probe-rs-tools
+            elf2uf2-rs
+            nixfmt
+          ];
+
+          CARGO_BUILD_TARGET = arch;
+
           shellHook = ''
-            export PATH="$HOME/.cargo/bin:$PATH"
-            rustup default nightly
-            rustup target add thumbv6m-none-eabi
+            shellinfo() {
+              echo "Rust:  $(rustc --version)"
+              echo "Cargo: $(cargo --version)"
+              echo "Targets available (filtered):"
+              rustc --print target-list | grep thumbv8m || true
+              echo "Installed rust-std components:"
+              rustc --print sysroot || true
+            }
           '';
         };
+
+        apps.default = utils.lib.mkApp { drv = self.packages.${system}.default; };
       }
     );
 }
