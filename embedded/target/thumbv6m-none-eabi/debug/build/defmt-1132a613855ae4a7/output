@@ -1,0 +1,4 @@
+cargo:rustc-link-search=/Users/isaacpruett/Documents/personal_projects/hexapod/embedded/target/thumbv6m-none-eabi/debug/build/defmt-1132a613855ae4a7/out
+cargo:rustc-cfg=no_cas
+cargo:rustc-check-cfg=cfg(c_variadic)
+cargo:rustc-check-cfg=cfg(no_cas)
