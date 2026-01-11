@@ -1,6 +1,0 @@
-$ mkdir -p "/Users/isaacpruett/Documents/personal_projects/hexapod/embedded/target/thumbv6m-none-eabi/debug/build/az-fea15ac4ab4edd1e/out/try_track_caller"
-$ cd "/Users/isaacpruett/Documents/personal_projects/hexapod/embedded/target/thumbv6m-none-eabi/debug/build/az-fea15ac4ab4edd1e/out/try_track_caller"
-$ printf '%s' "// try_tra"... > "/Users/isaacpruett/Documents/personal_projects/hexapod/embedded/target/thumbv6m-none-eabi/debug/build/az-fea15ac4ab4edd1e/out/try_track_caller/try_track_caller.rs"
-$ cd "/Users/isaacpruett/Documents/personal_projects/hexapod/embedded/target/thumbv6m-none-eabi/debug/build/az-fea15ac4ab4edd1e/out/try_track_caller" && "rustc" "try_track_caller.rs" "--emit=dep-info,metadata" >& /dev/null
-cargo:rustc-cfg=track_caller
-$ rm -r "/Users/isaacpruett/Documents/personal_projects/hexapod/embedded/target/thumbv6m-none-eabi/debug/build/az-fea15ac4ab4edd1e/out/try_track_caller"

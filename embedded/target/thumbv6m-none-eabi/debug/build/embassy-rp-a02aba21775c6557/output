@@ -1,4 +1,0 @@
-cargo:rustc-link-search=/Users/isaacpruett/Documents/personal_projects/hexapod/embedded/target/thumbv6m-none-eabi/debug/build/embassy-rp-a02aba21775c6557/out
-cargo:rerun-if-changed=build.rs
-cargo:rerun-if-changed=link-rp.x.in
-cargo::rustc-check-cfg=cfg(has_fpu)
